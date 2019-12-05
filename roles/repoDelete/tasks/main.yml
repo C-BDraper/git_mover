@@ -1,0 +1,4 @@
+---
+# tasks file for repoDelete
+- name: Deleting repos - cleaning up the canvas...
+  include: deleteRepos.yml

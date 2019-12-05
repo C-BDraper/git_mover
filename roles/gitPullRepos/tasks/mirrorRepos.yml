@@ -1,0 +1,5 @@
+---
+- name: cloning repository
+  # command: "git clone --depth 1 git@github.com:{{ entity }}/{{ repository }}.git"
+  command: "git clone --mirror git@{{ endpoint }}:{{ entity }}/{{ repository }}.git"
+...

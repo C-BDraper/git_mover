@@ -1,0 +1,8 @@
+---
+- name: Pushing repo "{{ modifier }}{{ repository }}"
+  command: 
+    chdir: "{{ pwd.stdout }}/{{ repository }}.git"
+    cmd: "git push --mirror git@{{ endpoint }}:{{ entity }}/{{ modifier }}{{ repository }}.git"
+  ignore_errors: yes
+
+...

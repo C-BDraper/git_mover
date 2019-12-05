@@ -1,0 +1,7 @@
+---
+- name: Mirroring repository {{ repository }}
+  include: 
+    file: mirrorRepos.yml
+  loop: "{{ repos }}"
+  loop_control:
+    loop_var: repository

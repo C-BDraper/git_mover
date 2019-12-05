@@ -1,0 +1,12 @@
+---
+# tasks file for mirrorPushRepo
+- name: Get current base directory (Only works in *nix os)
+  command: "pwd"
+  register: pwd
+  
+- name: Processing repositories
+  include: 
+    file: mirrorPushRepo.yml
+  loop: "{{ repos }}"
+  loop_control:
+    loop_var: repository

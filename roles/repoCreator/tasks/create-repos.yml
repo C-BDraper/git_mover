@@ -1,0 +1,24 @@
+---
+- name: Creating repository "{{ repo }}"
+  vars:
+    payload_repository:
+      name: "{{ modifier }}{{ repo }}"
+      description: ""
+      private: "{{ private_repo }}"
+  uri:
+    method: POST
+    headers:
+      Authorization: "Bearer {{ auth_source }}"
+    status_code: 201
+    url: "{{ endpoint }}"
+    body_format: json
+    body: "{{ payload_repository }}"
+    return_content: yes
+  # loop: "{{ repos }}"
+  # loop_control:
+  #   loop_var: repo
+  # register: creation_results
+
+# - name: Presenting log
+#   debug: var=creation_results
+...

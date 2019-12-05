@@ -1,0 +1,7 @@
+---
+# tasks file for repoCreator
+- name: creating repos
+  include: create-repos.yml
+  loop: "{{ repos }}"
+  loop_control:
+    loop_var: repo

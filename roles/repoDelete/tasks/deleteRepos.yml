@@ -1,0 +1,17 @@
+---
+- name: Deleting repository
+  uri:
+    method: DELETE
+    headers:
+      Authorization: "Bearer {{ auth_source }}"
+    status_code: 204
+    url: "{{ endpoint }}/{{ modifier }}{{ repo }}"
+    return_content: yes
+  loop: "{{ repos }}"
+  loop_control:
+    loop_var: repo
+  register: deletion_results
+
+- name: Presenting results
+  debug: var=deletion_results
+...

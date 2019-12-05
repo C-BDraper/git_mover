@@ -1,0 +1,62 @@
+---
+- name: Playbook for pulling repositories from a source and pusing to a destination
+  hosts: localhost
+  gather_facts: false
+  vars:
+    auth_source: 
+    api_base_url_source: https://api.github.com
+    # org_source: bankunited
+
+  pre_tasks:
+  - name: Loading reposistories from file
+    include_vars:
+      file: repos.yml
+      name: payload
+  
+  - name: Show variables
+    debug:
+      msg:
+        - "Auth: {{ auth is not none}}"
+  
+  - name: parsing out the repositories from the payload
+    set_fact:
+      repos: "{{ payload.tests }}"
+      # repos: "{{ payload.sampler}}"
+      # repos: "{{ payload.repos }}"
+  
+  roles:
+  - role: gitPullRepos
+    vars:
+      # entity: CapcoDevFx
+      entity: codabilly
+      # endpoint: gitCapco
+      endpoint: gitCodabilly
+    when: clean == False
+
+  - role: repoCreator
+    vars:
+      # entity: b-72R/repos
+      # github_endpoint: /orgs/"{{ entity }}"/repos
+      github_endpoint: /user/repos
+      private_repo: true
+      endpoint: "{{ api_base_url_source }}{{ github_endpoint }}"
+      modifier: DB-
+    when: clean == False
+  
+  - role: mirrorPushRepo
+    vars:
+      # entity: b-72R
+      entity: bilorge
+      endpoint: gitB72
+      modifier: DB-
+    when: clean == False
+
+  - role: repoDelete
+    vars:
+      modifier: DB-
+      # entity: b-72R
+      entity: bilorge
+      endpoint: "{{ api_base_url_source }}/repos/{{ entity }}"
+    when: clean == true
+  
+...
