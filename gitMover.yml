@@ -3,25 +3,18 @@
   hosts: localhost
   gather_facts: false
   vars:
-    auth_source: 
     api_base_url_source: https://api.github.com
-    # org_source: bankunited
 
   pre_tasks:
+    # This step loads all the variables needed for the plays.
   - name: Loading reposistories from file
     include_vars:
       file: repos.yml
       name: payload
   
-  - name: Show variables
-    debug:
-      msg:
-        - "Auth: {{ auth is not none}}"
-  
   - name: parsing out the repositories from the payload
     set_fact:
-      repos: "{{ payload.tests }}"
-      # repos: "{{ payload.sampler}}"
+      repos: "{{ payload.sampler}}"
       # repos: "{{ payload.repos }}"
   
   roles:
@@ -35,28 +28,29 @@
 
   - role: repoCreator
     vars:
-      # entity: b-72R/repos
+      # entity: bankunited
       # github_endpoint: /orgs/"{{ entity }}"/repos
       github_endpoint: /user/repos
       private_repo: true
       endpoint: "{{ api_base_url_source }}{{ github_endpoint }}"
       modifier: DB-
+      auth_source: "{{ payload.github_api_token }}"
     when: clean == False
   
   - role: mirrorPushRepo
     vars:
-      # entity: b-72R
-      entity: bilorge
-      endpoint: gitB72
+      # entity: bankunited
+      entity: C-BDraper
+      endpoint: gitBacbdraper #comes from ssh config
       modifier: DB-
     when: clean == False
 
   - role: repoDelete
     vars:
       modifier: DB-
-      # entity: b-72R
-      entity: bilorge
-      endpoint: "{{ api_base_url_source }}/repos/{{ entity }}"
+      # entity: bankunited
+      entity: C-BDraper
+      endpoint: "{{ api_base_url_source }}/repos/{{ entity }}" #same end poing for users or orgs
+      auth_source: "{{ payload.github_api_token }}"
     when: clean == true
-  
 ...

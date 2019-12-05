@@ -5,20 +5,18 @@
       name: "{{ modifier }}{{ repo }}"
       description: ""
       private: "{{ private_repo }}"
+      has_issues: true
+      has_projects: true
+      has_wiki: true
   uri:
     method: POST
     headers:
       Authorization: "Bearer {{ auth_source }}"
-    status_code: 201
+    status_code: 
+      - 201
+      - 422 # This code is returned when the repository already exists.
     url: "{{ endpoint }}"
     body_format: json
     body: "{{ payload_repository }}"
     return_content: yes
-  # loop: "{{ repos }}"
-  # loop_control:
-  #   loop_var: repo
-  # register: creation_results
-
-# - name: Presenting log
-#   debug: var=creation_results
 ...

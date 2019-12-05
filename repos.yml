@@ -1,17 +1,7 @@
 ---
-tests:
-- towerRWS
+github_api_token: [THIS CAN NOT BE NULL!!!!]
 sampler:
-- bku-leap-jenkins
-- bku-product-summary-presentation-service-extension
-- bku-employee-portal
-- bku-diconversion-service
-- bku-mx-integration
-- bku-frontend
-- bku-auth
-- bku-error-reporting-persistence-service
-- bku-forgot-username-presentation-spec
-- bku-forgot-username-presentation-service
+- git_moving
 repos:
 - bku-leap-jenkins
 - bku-product-summary-presentation-service-extension
