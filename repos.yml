@@ -3,6 +3,7 @@ github_api_token: [THIS CAN NOT BE NULL!!!!]
 sampler:
 - git_moving
 repos:
+- bb
 - bku-leap-jenkins
 - bku-product-summary-presentation-service-extension
 - bku-employee-portal
@@ -98,7 +99,6 @@ repos:
 - bku-user-context
 - bku-actions-integration
 - bku-delegated-registration
-- ios-mocks
 - bku-version-api
 - bku-p2p-transfer
 - bku-custom-service
@@ -118,9 +118,9 @@ repos:
 - communicator-node
 - bku-translate-widget
 - bku-ui-starterkit
-- bb
 - bku-leap-adr
 - bku-devops-backbase-editorial
 - bku-ui-theme-web
 - bku-devops-backbase-staging
+- ios-mocks
 ...
